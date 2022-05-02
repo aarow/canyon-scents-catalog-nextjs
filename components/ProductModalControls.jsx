@@ -1,4 +1,4 @@
-export default function ModalControls({ goTo, currItem, prevItem, nextItem }) {
+export default function ProductModalControls({ goTo, prevItem, nextItem }) {
   return (
     <>
       {nextItem && (
@@ -31,14 +31,6 @@ export default function ModalControls({ goTo, currItem, prevItem, nextItem }) {
           </span>
         </button>
       )}
-      <button
-        type="button"
-        onClick={() => goTo(currItem)}
-        aria-label={`Close ${currItem?.title}`}
-        className="slide-down fixed top-0 right-0 duration-200 w-16 h-16 text-4xl text-slate-700 hover:text-slate-900 hover:scale-125 z-20"
-      >
-        &times;
-      </button>
     </>
   );
 }

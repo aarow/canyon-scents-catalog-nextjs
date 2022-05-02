@@ -8,7 +8,7 @@ const OFF_STATE = {
   fillColor: "#fff",
 };
 const ON_STATE = {
-  outlineColor: "#fff",
+  outlineColor: "#000",
   fillColor: "#ff0000",
 };
 const HOVER_STATE = {

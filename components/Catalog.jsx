@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import CatalogItem from "./CatalogItem";
 import CatalogThumb from "./CatalogThumb";
-import ModalControls from "./ModalControls";
+import Modal from "./Modal";
+import ProductModalControls from "./ProductModalControls";
 import FavoritesList from "./FavoritesList";
 import Header from "./Header";
+import bannerPic from "../public/banner.jpg";
 
 export default function Catalog({ products }) {
   const [activeProduct, setActiveProduct] = useState(null);
@@ -21,39 +24,39 @@ export default function Catalog({ products }) {
       </Header>
 
       <div>
-        <img src="/banner.jpg" alt="" />
+        <Image src={bannerPic} alt="Canyon Scents inventory" />
+      </div>
+
+      <div className="prose lg:prose-lg m-auto mt-12 mb-6">
+        <h1 className="title-font text-center ">Spring 2022 Catalog</h1>
       </div>
 
       <Flipper flipKey={activeProduct?.id} spring="gentle">
-        {activeProduct && (
-          <>
-            <div className="z-10 fixed top-0 left-0 right-0 bottom-0  bg-white fade-in"></div>
-            <div className="z-40 relative">
-              <ModalControls
-                currItem={activeProduct}
-                goTo={handleGoTo}
-                prevItem={products[getIndex(activeProduct, products) - 1]}
-                nextItem={products[getIndex(activeProduct, products) + 1]}
-              />
-            </div>
-          </>
-        )}
-
         <div className="grid grid-flow-row-dense grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-4">
           {products.sort(sortString).map((product, index) => (
             <div key={product.id}>
-              {activeProduct?.id !== product.id ? (
+              {activeProduct?.id !== product.id && (
                 <CatalogThumb product={product} onClick={handleGoTo} />
-              ) : (
-                <div>
-                  <div className="z-10 fixed top-0 left-0 right-0 bottom-0">
-                    <CatalogItem currItem={activeProduct} />
-                  </div>
-                </div>
               )}
             </div>
           ))}
         </div>
+        {activeProduct && (
+          <Modal onClose={() => handleGoTo(activeProduct)}>
+            <ProductModalControls
+              goTo={handleGoTo}
+              prevItem={products[getIndex(activeProduct, products) - 1]}
+              nextItem={products[getIndex(activeProduct, products) + 1]}
+            />
+            {products.sort(sortString).map((product, index) => (
+              <div key={product.id}>
+                {activeProduct?.id === product.id && (
+                  <CatalogItem currItem={activeProduct} />
+                )}
+              </div>
+            ))}
+          </Modal>
+        )}
       </Flipper>
     </div>
   );

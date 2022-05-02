@@ -40,7 +40,7 @@ export default function CatalogThumb({ product, onClick }) {
           </Flipped>
         </div>
       </button>
-      <div className="absolute bottom-8 right-8 ">
+      <div className="absolute bottom-2 right-3 ">
         <Flipped flipId={`${id}-productFavorite`}>
           <FavoriteButton id={id} />
         </Flipped>
