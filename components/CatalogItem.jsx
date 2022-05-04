@@ -22,7 +22,6 @@ export default function CatalogItem({ currItem }) {
         <div className="text-sm">
           <div className="relative prose lg:prose-xl">
             <h2 className="text-center">{title}</h2>
-
             <span className="block m-auto mb-5 w-32 border-t border-black" />
             <div>{description}</div>
             <div className="grid grid-cols-3 mt-3">
@@ -59,15 +58,15 @@ export default function CatalogItem({ currItem }) {
   }
 
   return (
-    <div className="flex items-center h-screen">
-      <div className="grid grid-cols-2 gap-8 w-5/6 lg:w-2/3 mx-auto max-h-screen">
-        <div className="pt-6">
+    <div className="flex items-center">
+      <div className="grid sm:grid-cols-2 gap-8 w-5/6 lg:w-2/3 mx-auto mt-20 sm:mt-0">
+        <div className="pt-6 order-2 sm:order-1">
           <Copy />
           <Flipped flipId={`${id}-productFavorite`}>
             <FavoriteButton id={id} />
           </Flipped>
         </div>
-        <div className="">
+        <div className="order-1 sm:order-2">
           <Image />
         </div>
       </div>

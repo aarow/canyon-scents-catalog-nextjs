@@ -81,16 +81,21 @@ export default function FavoritesList({ products }) {
         <Modal onClick={toggleModal} onClose={toggleModal}>
           <div
             ref={(el) => (listRef = el)}
-            className="w-full h-full flex justify-center items-center"
+            className="w-full h-full flex justify-center items-center px-3"
           >
-            <div className="w-96 mx-auto prose lg:prose-xl">
-              <h2 className="title-font">
-                <span className="pr-3">
-                  <HeartIcon size={44} fillColor="#e9e9e9" />
+            <div className="w-96 mx-auto">
+              <span className="flex items-center mb-2">
+                <span className="pr-3 relative">
+                  <HeartIcon size={32} fillColor="#e9e9e9" />
+                  {favoritesList.length > 0 && (
+                    <span className="absolute top-0 left-1/2 bg-red-600 text-white text-xs rounded-full px-1">
+                      {favoritesList.length}
+                    </span>
+                  )}
                 </span>
-                Favorites
-              </h2>
-              <div>
+                <h2 className="title-font text-3xl">Favorites</h2>
+              </span>
+              <div className="mb-2">
                 <ReactToPrint
                   trigger={() => <button type="button">Print</button>}
                   content={() => listRef}
@@ -120,7 +125,7 @@ export default function FavoritesList({ products }) {
         aria-label={showFavoriteList ? "Hide Favorites" : "Show Favorites"}
         className="relative"
       >
-        <HeartIcon size={44} fillColor="#e9e9e9" />
+        <HeartIcon size={32} fillColor="#e9e9e9" />
         {favoritesList.length > 0 && (
           <span className="absolute top-0 left-3/4 bg-red-600 text-white text-sm rounded-full px-2">
             {favoritesList.length}

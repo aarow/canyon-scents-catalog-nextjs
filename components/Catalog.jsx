@@ -23,16 +23,16 @@ export default function Catalog({ products }) {
         <FavoritesList products={products} />
       </Header>
 
-      <div>
+      <div className="text-center">
         <Image src={bannerPic} alt="Canyon Scents inventory" />
       </div>
 
-      <div className="prose lg:prose-lg m-auto mt-12 mb-6">
+      <div className="prose lg:prose-lg m-auto mt-12 mb-6 px-3">
         <h1 className="title-font text-center ">Spring 2022 Catalog</h1>
       </div>
 
       <Flipper flipKey={activeProduct?.id} spring="gentle">
-        <div className="grid grid-flow-row-dense grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-4">
+        <div className="grid grid-flow-row-dense grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-4 max-w-screen-2xl m-auto">
           {products.sort(sortString).map((product, index) => (
             <div key={product.id}>
               {activeProduct?.id !== product.id && (
@@ -43,11 +43,6 @@ export default function Catalog({ products }) {
         </div>
         {activeProduct && (
           <Modal onClose={() => handleGoTo(activeProduct)}>
-            <ProductModalControls
-              goTo={handleGoTo}
-              prevItem={products[getIndex(activeProduct, products) - 1]}
-              nextItem={products[getIndex(activeProduct, products) + 1]}
-            />
             {products.sort(sortString).map((product, index) => (
               <div key={product.id}>
                 {activeProduct?.id === product.id && (
@@ -55,6 +50,11 @@ export default function Catalog({ products }) {
                 )}
               </div>
             ))}
+            <ProductModalControls
+              goTo={handleGoTo}
+              prevItem={products[getIndex(activeProduct, products) - 1]}
+              nextItem={products[getIndex(activeProduct, products) + 1]}
+            />
           </Modal>
         )}
       </Flipper>
