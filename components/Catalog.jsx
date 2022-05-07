@@ -11,7 +11,6 @@ import Footer from "./Footer";
 import bannerPic from "../public/banner.jpg";
 
 export default function Catalog({ products }) {
-  console.log(products);
   // return <div>fuck</div>;
   const [activeProduct, setActiveProduct] = useState(null);
 
