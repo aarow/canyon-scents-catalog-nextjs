@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import ProductModalControls from "./ProductModalControls";
 import FavoritesList from "./FavoritesList";
 import Header from "./Header";
+import Footer from "./Footer";
 import bannerPic from "../public/banner.jpg";
 
 export default function Catalog({ products }) {
@@ -34,7 +35,7 @@ export default function Catalog({ products }) {
       </div>
 
       <Flipper flipKey={activeProduct?.id} spring="gentle">
-        <div className="grid grid-flow-row-dense grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-4 max-w-screen-2xl m-auto">
+        <div className="grid grid-flow-row-dense grid-cols-2 md:grid-cols-4 lg:grid-cols-6 py-4 max-w-screen-2xl m-auto">
           {products.map((product, index) => (
             <div key={product.id}>
               {activeProduct?.id !== product.id && (
@@ -60,6 +61,7 @@ export default function Catalog({ products }) {
           </Modal>
         )}
       </Flipper>
+      <Footer />
     </div>
   );
 }
