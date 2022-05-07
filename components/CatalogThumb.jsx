@@ -4,7 +4,7 @@ import FavoriteButton from "./FavoriteButton";
 
 export default function CatalogThumb({ product, onClick }) {
   const { id, title, featuredImage } = product;
-  const { hd: hdImage } = featuredImage;
+  const { hd: hdImage } = featuredImage || "";
   const backgroundStyle = {
     backgroundImage: `url("${featuredImage?.thumb}")`,
   };

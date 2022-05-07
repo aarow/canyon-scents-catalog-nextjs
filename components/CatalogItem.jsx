@@ -5,12 +5,13 @@ export default function CatalogItem({ currItem }) {
   const {
     id,
     title,
-    featuredImage: { hd: imageSrc },
+    featuredImage: { hd: imageSrc } = "",
     description,
     priceRange: {
       maxVariantPrice: { amount: maxPrice },
       minVariantPrice: { amount: minPrice },
     },
+    totalInventory,
   } = currItem;
   const backgroundStyle = {
     backgroundImage: `url("${imageSrc}")`,
@@ -24,7 +25,7 @@ export default function CatalogItem({ currItem }) {
             <h2 className="text-center">{title}</h2>
             <span className="block m-auto mb-5 w-32 border-t border-black" />
             <div>{description}</div>
-            <div className="grid grid-cols-3 mt-3">
+            <div className="flex justify-between items-center mt-3">
               <div className="font-serif italic">
                 {maxPrice === minPrice && <span>${maxPrice}</span>}
                 {maxPrice !== minPrice && (
@@ -33,6 +34,12 @@ export default function CatalogItem({ currItem }) {
                     <span className="text-red-700">${minPrice}</span>
                   </>
                 )}
+              </div>
+              <div className="font-serif italic">
+                {totalInventory < 3 && <span>(backordered)</span>}
+                <Flipped flipId={`${id}-productFavorite`}>
+                  <FavoriteButton id={id} className="inline" />
+                </Flipped>
               </div>
             </div>
           </div>
@@ -62,9 +69,6 @@ export default function CatalogItem({ currItem }) {
       <div className="grid sm:grid-cols-2 gap-8 w-5/6 lg:w-2/3 mx-auto mt-20 sm:mt-0">
         <div className="pt-6 order-2 sm:order-1">
           <Copy />
-          <Flipped flipId={`${id}-productFavorite`}>
-            <FavoriteButton id={id} />
-          </Flipped>
         </div>
         <div className="order-1 sm:order-2">
           <Image />

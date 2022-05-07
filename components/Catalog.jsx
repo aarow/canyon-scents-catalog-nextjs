@@ -10,6 +10,8 @@ import Header from "./Header";
 import bannerPic from "../public/banner.jpg";
 
 export default function Catalog({ products }) {
+  console.log(products);
+  // return <div>fuck</div>;
   const [activeProduct, setActiveProduct] = useState(null);
 
   function handleGoTo(newProduct) {
@@ -33,7 +35,7 @@ export default function Catalog({ products }) {
 
       <Flipper flipKey={activeProduct?.id} spring="gentle">
         <div className="grid grid-flow-row-dense grid-cols-2 md:grid-cols-4 lg:grid-cols-6 p-4 max-w-screen-2xl m-auto">
-          {products.sort(sortString).map((product, index) => (
+          {products.map((product, index) => (
             <div key={product.id}>
               {activeProduct?.id !== product.id && (
                 <CatalogThumb product={product} onClick={handleGoTo} />
@@ -43,7 +45,7 @@ export default function Catalog({ products }) {
         </div>
         {activeProduct && (
           <Modal onClose={() => handleGoTo(activeProduct)}>
-            {products.sort(sortString).map((product, index) => (
+            {products.map((product, index) => (
               <div key={product.id}>
                 {activeProduct?.id === product.id && (
                   <CatalogItem currItem={activeProduct} />
@@ -66,9 +68,4 @@ function getIndex(item, group) {
   return group.findIndex((currItem) => {
     return currItem?.id === item?.id;
   });
-}
-
-function sortString(a, b) {
-  if (a.title > b.title) return 1;
-  return -1;
 }

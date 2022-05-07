@@ -16,7 +16,7 @@ const HOVER_STATE = {
   fillColor: "#e9e9e9",
 };
 
-export default function FavoriteButton({ id }) {
+export default function FavoriteButton({ id, className }) {
   const dispatch = useDispatch();
   const isFavorite = useSelector((state) => state.favorites?.ids?.includes(id));
   const [uiState, setUiState] = useState(OFF_STATE);
@@ -40,7 +40,7 @@ export default function FavoriteButton({ id }) {
     <button
       type="button"
       onClick={handleClick}
-      className="block w-16 h-16 flex justify-center items-center"
+      className={`${className} w-16 h-16`}
     >
       <HeartIcon
         size={32}
